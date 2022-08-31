@@ -4,6 +4,8 @@ export default class extends AbstractView {
     constructor(params) {
         super(params);
         this.setTitle("Dashboard");
+        document.getElementById("bpm").style.display="";
+        document.getElementById("tmp").style.display="";
     }
 
     async getHtml() {
