@@ -15,12 +15,25 @@
     </nav>
     <div id="app"></div>
     <div id="container">
-        <canvas id="bpm"  style="width: 50%; height: 50%"></canvas>
-        <canvas id="tmp"  style="width: 50%; height: 50%"></canvas>
+        <canvas id="bpm"  style="width: 75%; height: 75%"></canvas>
+        <canvas id="tmp"  style="width: 75%; height: 75%"></canvas>
+        <canvas id="rsp"  style="width: 75%; height: 75%"></canvas>
+        <canvas id="oxy"  style="width: 75%; height: 75%"></canvas>
     </div>
     <script>
+        // Heart values
         var yValues = [120,70,80,85,110,135,167,120,90,95,85];
+
+        // Temperature values
         var tValues = [35,36,36,37,35,30,29,32,33,35,33];
+
+        // respiration values
+        var rValues = [21,23,25,26,27,21,26,23,24,25,26];
+
+        // oxygen values
+        var oValues = [97,97,98,99,98,97,95,94,96,98,99];
+
+        // Labels
         var xValues = [1,2,3,4,5,6,7,8,9,10,11];
 
         // Build the static dataset
@@ -42,9 +55,32 @@
             }]
         };
 
-        // Get the context of the canvas element we want to select
+        const data3 = {
+            labels: xValues,
+            datasets: [{
+                label: 'First Record',
+                data: rValues,
+                borderColor: "rgba(0,0,255,1)"
+            }]
+        };
+
+        const data4 = {
+            labels: xValues,
+            datasets: [{
+                label: 'First Record',
+                data: oValues,
+                borderColor: "rgba(255,0,255,1)"
+            }]
+        };
+
+
+        // Get the context of the canvas elements we want to select
         var ctx1 = document.getElementById("bpm").getContext("2d");
         var ctx2 = document.getElementById("tmp").getContext("2d");
+        var ctx3 = document.getElementById("rsp").getContext("2d");
+        var ctx4 = document.getElementById("oxy").getContext("2d");
+
+        // Create the charts
         var chart1 = new Chart(ctx1, {
             type: 'line',
             data: data1,
@@ -67,6 +103,36 @@
                 plugins: {
                     title: {
                         text: "Temperature Evolution (°C)",
+                        display: true
+                    }
+                }
+            },
+            maintainAspectRatio: false
+
+        })
+
+        var chart3 = new Chart(ctx3, {
+            type: 'line',
+            data: data3,
+            options: {
+                plugins: {
+                    title: {
+                        text: "Respiration Rate Evolution (bpm)",
+                        display: true
+                    }
+                }
+            },
+            maintainAspectRatio: false
+
+        })
+
+        var chart4 = new Chart(ctx4, {
+            type: 'line',
+            data: data4,
+            options: {
+                plugins: {
+                    title: {
+                        text: "Oxygen's Saturation Evolution (%)",
                         display: true
                     }
                 }

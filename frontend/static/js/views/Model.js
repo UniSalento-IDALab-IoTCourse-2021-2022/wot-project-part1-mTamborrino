@@ -4,8 +4,11 @@ export default class extends AbstractView {
     constructor(params) {
         super(params);
         this.setTitle("About the model");
+        // Hide the charts when the Model page is selected
         document.getElementById("bpm").style.display="none";
         document.getElementById("tmp").style.display="none";
+        document.getElementById("rsp").style.display="none";
+        document.getElementById("oxy").style.display="none";
     }
 
     async getHtml() {

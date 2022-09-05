@@ -4,8 +4,11 @@ export default class extends AbstractView {
     constructor(params) {
         super(params);
         this.setTitle("Dashboard");
+        // Display the charts when the Dashboard is selected
         document.getElementById("bpm").style.display="";
         document.getElementById("tmp").style.display="";
+        document.getElementById("rsp").style.display="";
+        document.getElementById("oxy").style.display="";
     }
 
     async getHtml() {
