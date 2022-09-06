@@ -166,6 +166,14 @@
             });
             chart.update();
         }
+
+        // Function to update the charts displaying the newest data and removing the oldest
+        function updateMyChart(chart, label, data) {
+            addData(chart,label,data);
+            removeData(chart)
+        }
+
+
     </script>
     <script type="module" src="/static/js/index.js"></script>
 </body>
