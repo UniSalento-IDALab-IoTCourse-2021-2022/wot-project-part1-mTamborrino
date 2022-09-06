@@ -146,6 +146,26 @@
             maintainAspectRatio: false
 
         })
+
+        // Function to append new data and label to the chart structure
+        function addData(chart, label, data) {
+            chart.data.labels.push(label);
+            chart.data.datasets.forEach((dataset) => {
+                dataset.data.push(data);
+            });
+            chart.update();
+        }
+
+        // Function to remove the oldest data and label from the chart structure
+        function removeData(chart) {
+            // chart.data.labels.pop(); old instruction
+            chart.data.labels.shift()
+            chart.data.datasets.forEach((dataset) => {
+                // dataset.data.pop(); old instruction
+                dataset.data.shift()
+            });
+            chart.update();
+        }
     </script>
     <script type="module" src="/static/js/index.js"></script>
 </body>
