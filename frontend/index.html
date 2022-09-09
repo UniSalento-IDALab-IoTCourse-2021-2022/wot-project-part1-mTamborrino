@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/static/css/index.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js" type="text/javascript"></script>
 </head>
-<body id="general">
+<body id="general" onload="startup()">
     <nav class="nav">
         <a href="/" class="nav__link" data-link>Dashboard</a>
         <a href="/model" class="nav__link" data-link>Model</a>
@@ -23,6 +23,43 @@
         <canvas id="oxy"></canvas>
     </div>
     <script>
+        // Function to manage updates for charts
+        function addData(chart, label, data) {
+            chart.data.labels.push(label);
+            chart.data.datasets.forEach((dataset) => {
+                dataset.data.push(data);
+            });
+            chart.update();
+        }
+
+        function removeData(chart) {
+            chart.data.labels.shift()
+            chart.data.datasets.forEach((dataset) => {
+                dataset.data.shift()
+            });
+            chart.update();
+        }
+
+        // For updating all charts, only use the following function!
+
+        function updateAllCharts(values) {
+            // Chart 1
+            addData(chart1,values[4],values[0]);
+            removeData(chart1);
+
+            // Chart 2
+            addData(chart2,values[4],values[1]);
+            removeData(chart2);
+
+            // Chart 3
+            addData(chart3,values[4],values[2]);
+            removeData(chart3);
+
+            // Chart 4
+            addData(chart4,values[4],values[3]);
+            removeData(chart4);
+        }
+
         // Heart values
         var yValues = [120,70,80,85,110,135,167,120,90,95,85];
 
@@ -38,7 +75,7 @@
         // Labels
         var xValues = [1,2,3,4,5,6,7,8,9,10,11];
 
-        // Build the static dataset
+        // Build the static datasets
         const data1 = {
             labels: xValues,
             datasets: [{
@@ -147,33 +184,20 @@
 
         })
 
-        // Function to append new data and label to the chart structure
-        function addData(chart, label, data) {
-            chart.data.labels.push(label);
-            chart.data.datasets.forEach((dataset) => {
-                dataset.data.push(data);
-            });
-            chart.update();
+    </script>
+    <script>
+        function startup() {
+
+            var socketExample = new WebSocket("ws://localhost:3001");
+            socketExample.onopen = function (event) {
+                socketExample.send("Text to be sent to the server!");
+            };
+            socketExample.onmessage = function (event) {
+                var values = event.data.split(',')
+                console.log(values);
+                updateAllCharts(values)
+            }
         }
-
-        // Function to remove the oldest data and label from the chart structure
-        function removeData(chart) {
-            // chart.data.labels.pop(); old instruction
-            chart.data.labels.shift()
-            chart.data.datasets.forEach((dataset) => {
-                // dataset.data.pop(); old instruction
-                dataset.data.shift()
-            });
-            chart.update();
-        }
-
-        // Function to update the charts displaying the newest data and removing the oldest
-        function updateMyChart(chart, label, data) {
-            addData(chart,label,data);
-            removeData(chart)
-        }
-
-
     </script>
     <script type="module" src="/static/js/index.js"></script>
 </body>

@@ -32,6 +32,7 @@ app.post("/temperature", (req, res, next) => {
     var timestamp = req.body.timestamp;
 
     let values = [temperature, heartrate, resprate, oxygensat, timestamp]
+    console.log(values)
 
     async function pushInDb() {
         const client = new MongoClient(uri, {useUnifiedTopology: true});
@@ -61,7 +62,7 @@ app.post("/temperature", (req, res, next) => {
     async function pushToClient(){
         wss.clients.forEach(function each(client) {
             if (client.readyState === WebSocket.OPEN) {
-                client.send(temperature);
+                client.send(values.toString());
             }
         });
     }
