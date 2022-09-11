@@ -8,13 +8,6 @@ const app = express();
 
 const wss = new WebSocket.Server({ port: 3001 });
 
-wss.on('connection', function connection(ws) {
-    ws.on('message', function incoming(message) {
-        console.log('received: %s', message);
-    });
-    ws.send('something');
-});
-
 app.use(
     express.urlencoded({
         extended: true
@@ -67,6 +60,10 @@ app.post("/temperature", (req, res, next) => {
     }
     pushToClient().catch(console.dir);
     res.sendStatus(200)
+});
+app.get('/download', function(req, res){
+    const file = `${__dirname}/iot_model.joblib`;
+    res.download(file); // Set disposition and send it.
 });
 
 app.use("/static", express.static(path.resolve(__dirname, "frontend", "static")));
