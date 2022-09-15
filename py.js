@@ -8,7 +8,7 @@ var outcome;
 const python = spawn('python', ['script.py', data[0], data[1], data[2], data[3]]);
 python.stdout.on("data", function (data) {
     console.log("data from script");
-    outcome = data
+    outcome = data.toString()
     console.log(outcome)
 })
 
