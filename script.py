@@ -9,7 +9,7 @@ import pickle
 def main():
     # Take data from the arguments
     data = [sys.argv[1:]]
-    filename = 'finalized_model.sav'
+    filename = '/Users/micheletamborrino/WebstormProjects/iotdash/finalized_model.sav'
     # Load the model with that filename
     model = pickle.load(open(filename, 'rb'))
     # print(data)
