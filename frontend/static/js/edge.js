@@ -18,7 +18,7 @@ function checkModel() {
     }
     else{
         console.log("Model not found. I'm downloading...")
-        download('http://192.168.1.39:3000/download', 'finalized_model.sav')
+        download('http://192.168.1.39:3000/download', '/Users/micheletamborrino/WebstormProjects/iotdash/finalized_model.sav')
     }
 }
 
