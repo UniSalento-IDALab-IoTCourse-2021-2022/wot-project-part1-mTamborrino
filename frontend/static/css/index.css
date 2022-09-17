@@ -42,3 +42,9 @@ a {
     height: 200px;
     margin-bottom: 100px;
 }
+
+p {
+    margin: 2em;
+    line-height: 1.5;
+    font-weight: 500;
+}
