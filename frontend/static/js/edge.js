@@ -1,5 +1,6 @@
 const http = require('http')
-const {spawn} = require('child_process');
+const {spawnSync} = require('child_process');
+const execSync = require("child_process").execSync;
 var fs = require('fs');
 
 function download(url, dest, cb) {
@@ -18,24 +19,18 @@ function checkModel() {
     }
     else{
         console.log("Model not found. I'm downloading...")
-        download('http://192.168.1.39:3000/download', '/Users/micheletamborrino/WebstormProjects/iotdash/finalized_model.sav')
+        download('http://127.0.0.1:3000/download', '/Users/micheletamborrino/WebstormProjects/iotdash/finalized_model.sav')
     }
 }
 
 function model(hr, respbpm, spo2, bodytemp) {
-    let outcome
     // Launch a script with Python as interpreter, and send to output what it prints
-    const python = spawn('python', ['../../../script.py', hr, respbpm, spo2, bodytemp]);
-    python.stdout.on("data", function (data) {
-        console.log("data from script");
-        outcome = data.toString()
-        console.log(outcome)
-    })
-
-    // Return exit code of the script
-    python.on("close", (code) => {
-        console.log(`child process closed stdio with code ${code}`)
-    })
+    const python = spawnSync('python3', ['../../../script.py', hr, respbpm, spo2, bodytemp]);
+    if (python.status!==0) {
+        console.log(Error(python.stderr))
+        process.exitCode = 1;
+    }
+    return python.output[1].toString().slice(1,2)
 }
 
 //We use this function to round the generated values using a given precision
@@ -74,25 +69,25 @@ function slightlyChange(num, decimal) {
     }
 }
 
+checkModel()
 let startingtemp = getRandomNumber(36.3, 37.1, true);
 let startinghr = getRandomNumber(60, 121);
 let startingrespbpm = getRandomNumber(12, 17);
 let startingspo2 = getRandomNumber(97, 100);
-
 //Read values to send every 2 sec
-setInterval(function() {
+setInterval( function () {
     const date = new Date();
     let bodytemp = slightlyChange(startingtemp, true);
     let hr = slightlyChange(startinghr);
     let respbpm = slightlyChange(startingrespbpm);
     let spo2 = startingspo2;
-    console.log('Body temperature: '+bodytemp+'°C')
-    console.log('Heart rate: '+hr+' BPM');
-    console.log('Respiratory rate: '+respbpm+' BPM')
-    console.log('Oxygen saturation: '+spo2+'%');
+    console.log('Body temperature: ' + bodytemp + '°C')
+    console.log('Heart rate: ' + hr + ' BPM');
+    console.log('Respiratory rate: ' + respbpm + ' BPM')
+    console.log('Oxygen saturation: ' + spo2 + '%');
     // Send data to model
-    model(hr, respbpm, spo2, bodytemp)
-    //console.log(date);
+    let prediction = model(hr, respbpm, spo2, bodytemp)
+    console.log(prediction)
 
     const data = JSON.stringify({
         'sensor': 'Mario Rossi',
@@ -100,7 +95,8 @@ setInterval(function() {
         'temperature': bodytemp,
         'heartrate': hr,
         'resprate': respbpm,
-        'oxygensat': spo2
+        'oxygensat': spo2,
+        'model_prediction': prediction
     })
 
     const options = {
@@ -133,4 +129,4 @@ setInterval(function() {
     //send the request
     req.write(data);
     req.end();
-}, 2000);
+}, 3000);

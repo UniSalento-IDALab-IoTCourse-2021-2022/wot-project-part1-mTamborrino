@@ -6,6 +6,7 @@
     <title>Driver State Monitoring Dashboard</title>
     <link rel="stylesheet" href="/static/css/index.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0" type="text/javascript"></script>
 </head>
 <body id="general" onload="startup()">
     <nav class="nav">
@@ -24,6 +25,7 @@
         <canvas id="oxy"></canvas>
     </div>
     <script>
+        Chart.register(ChartDataLabels)
         // Function to manage updates for charts
         function addData(chart, label, data) {
             chart.data.labels.push(label);
@@ -125,10 +127,25 @@
             type: 'line',
             data: data1,
             options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                        }
+                    }]
+                },
                 plugins: {
                     title: {
                         text: "Heart Rate Evolution (bpm)",
                         display: true
+                    },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        formatter: Math.round,
+                        font: {
+                            weight: 'bold'
+                        }
                     }
                 },
                 responsive: true
@@ -190,8 +207,12 @@
         function startup() {
             var socketExample = new WebSocket("ws://localhost:3001");
             socketExample.onmessage = function (event) {
-                var values = event.data.split(',')
-                updateAllCharts(values)
+                var values = event.data.split(',');
+                updateAllCharts(values);
+
+                if (values[5]==="1") {
+                    document.getElementById("condition").innerHTML = "Driver condition: Abnormal!!";
+                }
             }
         }
     </script>
