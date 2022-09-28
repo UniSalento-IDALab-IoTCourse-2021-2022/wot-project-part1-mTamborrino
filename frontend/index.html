@@ -24,8 +24,17 @@
         <canvas id="rsp"></canvas>
         <canvas id="oxy"></canvas>
     </div>
+    <div id="container3" class="mycontainer">
+        <h2>Vehicle information</h2>
+        <p>Cabin temperature: </p>
+        <p>Velocity: </p>
+        <p>State of brakes: </p>
+    </div>
+    <div id="imgc" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+        <img src="carlogo.jpg">
+    </div>
     <script>
-        Chart.register(ChartDataLabels)
+        // Chart.register(ChartDataLabels)
         // Function to manage updates for charts
         function addData(chart, label, data) {
             chart.data.labels.push(label);
@@ -48,35 +57,41 @@
         function updateAllCharts(values) {
             // Chart 1
             addData(chart1,values[4].slice(10),values[1]);
-            removeData(chart1);
+            //removeData(chart1)
 
             // Chart 2
             addData(chart2,values[4].slice(10),values[0]);
-            removeData(chart2);
+            //removeData(chart2);
 
             // Chart 3
             addData(chart3,values[4].slice(10),values[2]);
-            removeData(chart3);
+            //removeData(chart3);
 
             // Chart 4
             addData(chart4,values[4].slice(10),values[3]);
-            removeData(chart4);
+            //removeData(chart4);
         }
 
         // Heart values
-        var yValues = [120,70,80,85,110,135,167,120,90,95,85];
+        // var yValues = [120,70,80,85,110,135,167,120,90,95,85];
+        var yValues = [];
 
         // Temperature values
-        var tValues = [35,36,36,37,35,30,29,32,33,35,33];
+        // var tValues = [35,36,36,37,35,30,29,32,33,35,33];
+        var tValues = [];
 
         // respiration values
-        var rValues = [21,23,25,26,27,21,26,23,24,25,26];
+        // var rValues = [21,23,25,26,27,21,26,23,24,25,26];
+        var rValues = [];
 
         // oxygen values
-        var oValues = [97,97,98,99,98,97,95,94,96,98,99];
+        // var oValues = [97,97,98,99,98,97,95,94,96,98,99];
+        var oValues = [];
 
         // Labels
-        var xValues = [1,2,3,4,5,6,7,8,9,10,11];
+        // var xValues = [1,2,3,4,5,6,7,8,9,10,11];
+        var xValues = [];
+
 
         // Build the static datasets
         const data1 = {
