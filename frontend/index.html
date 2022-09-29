@@ -26,9 +26,9 @@
     </div>
     <div id="container3" class="mycontainer">
         <h2>Vehicle information</h2>
-        <p>Cabin temperature: </p>
-        <p>Velocity: </p>
-        <p>Percentage of CO2 in the cabin: </p>
+        <p id="ctp">Cabin temperature: </p>
+        <p id="v">Velocity: </p>
+        <p id="co2">Percentage of CO2 in the cabin: </p>
     </div>
     <div id="imgc" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
         <img src="static/img/carlogo.jpg">
@@ -225,9 +225,20 @@
                 var values = event.data.split(',');
                 updateAllCharts(values);
 
-                if (values[5]==="Abnormal") {
+                // Print the prediction outcome
+                if (values[7]==="Abnormal") {
                     document.getElementById("condition").innerHTML = "Driver condition: Abnormal!!";
                 }
+
+                // Print the cabin temperature
+                let ctp = "Cabin temperature: ";
+                ctp = ctp.concat(values[5]);
+                document.getElementById("ctp").innerHTML = ctp;
+
+                // Print the co2 percentage
+                let co2 = "Percentage of CO2 in the cabin: ";
+                co2 = co2.concat(values[6], "%");
+                document.getElementById("co2").innerHTML = co2;
             }
         }
     </script>
