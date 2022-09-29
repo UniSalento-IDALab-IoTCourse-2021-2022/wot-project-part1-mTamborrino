@@ -14,12 +14,12 @@ function download(url, dest, cb) {
 }
 
 function checkModel() {
-    if(fs.existsSync('/Users/micheletamborrino/WebstormProjects/iotdash/old_model.sav')){
+    if(fs.existsSync('/Users/micheletamborrino/WebstormProjects/iotdash/finalized_model.sav')){
         console.log("The edge device found a model.")
     }
     else{
         console.log("Model not found. I'm downloading...")
-        download('http://127.0.0.1:3000/download', '/Users/micheletamborrino/WebstormProjects/iotdash/old_model.sav')
+        download('http://127.0.0.1:3000/download', '/Users/micheletamborrino/WebstormProjects/iotdash/finalized_model.sav')
     }
 }
 
@@ -76,7 +76,10 @@ let startingtemp = getRandomNumber(36.3, 37.1, true);
 let startinghr = getRandomNumber(60, 80);
 let startingrespbpm = getRandomNumber(12, 16);
 let startingspo2 = getRandomNumber(97, 99);
+let startingcartemp = getRandomNumber(20, 32)
+let startingco2 = getRandomNumber(7, 11)
 let stressing = false
+
 //Read values to send every 2 sec
 setInterval( function () {
     const d_t = new Date();
@@ -92,6 +95,8 @@ setInterval( function () {
     let hr = slightlyChange(startinghr);
     let respbpm = slightlyChange(startingrespbpm);
     let spo2 = startingspo2;
+    let cartemp = slightlyChange(startingcartemp)
+    let co2 = slightlyChange(startingco2)
 
     if(stressing){
         if(hr < 150){
@@ -119,8 +124,10 @@ setInterval( function () {
 
     console.log('Body temperature: ' + bodytemp + '°C')
     console.log('Heart rate: ' + hr + ' BPM');
-    console.log('Respiratory rate: ' + respbpm + ' BPM')
+    console.log('Respiratory rate: ' + respbpm + ' BPM');
     console.log('Oxygen saturation: ' + spo2 + '%');
+    console.log('Cockpit temperature: '+cartemp+'°C');
+    console.log('Cockpit CO2 percentage: '+co2+'%');
     // Send data to model
     let prediction = model(hr, respbpm, spo2, bodytemp)
     console.log(prediction)
@@ -145,6 +152,8 @@ setInterval( function () {
         'heartrate': hr,
         'resprate': respbpm,
         'oxygensat': spo2,
+        'cartemp': cartemp,
+        'co2': co2,
         'model_prediction': prediction
     })
 
