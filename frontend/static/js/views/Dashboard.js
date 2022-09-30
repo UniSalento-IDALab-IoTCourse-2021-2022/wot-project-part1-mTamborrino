@@ -9,6 +9,9 @@ export default class extends AbstractView {
         document.getElementById("tmp").style.display="";
         document.getElementById("rsp").style.display="";
         document.getElementById("oxy").style.display="";
+        document.getElementById("condition").style.display="";
+        document.getElementById("container3").style.display="";
+        document.getElementById("imgc").style.display="";
     }
 
     async getHtml() {

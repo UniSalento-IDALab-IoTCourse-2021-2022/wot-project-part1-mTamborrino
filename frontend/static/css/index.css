@@ -48,3 +48,7 @@ p {
     line-height: 1.5;
     font-weight: 500;
 }
+
+div.t {
+    mix-blend-mode: multiply;
+}
