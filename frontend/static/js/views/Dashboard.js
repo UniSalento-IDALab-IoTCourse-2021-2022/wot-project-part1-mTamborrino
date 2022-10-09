@@ -12,6 +12,7 @@ export default class extends AbstractView {
         document.getElementById("condition").style.display="";
         document.getElementById("container3").style.display="";
         document.getElementById("imgc").style.display="";
+        document.getElementById("body").style.display="";
     }
 
     async getHtml() {
