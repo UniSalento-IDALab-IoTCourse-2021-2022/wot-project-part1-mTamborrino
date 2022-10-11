@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Driver State Monitoring Dashboard</title>
+    <title style="text-transform: uppercase">Driver State Monitoring Dasboard</title>
     <link rel="stylesheet" href="/static/css/index.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0" type="text/javascript"></script>
@@ -15,23 +15,51 @@
         <a href="/else" class="nav__link" data-link>Something Else</a>
     </nav>
     <div id="app"></div>
-    <p id="condition">Driver Condition: Normal...</p>
-    <div id="container1" class="mycontainer" style="display:flex; flex-direction: row; justify-content: left; align-items: center">
-        <canvas id="bpm"></canvas>
-        <canvas id="tmp"></canvas>
+    <div id="infodata">
+        <button type="submit" class="btn">History<img src="https://cdn-icons-png.flaticon.com/512/2961/2961948.png" style="width:19px; margin-left:8px; margin-right:3px; flex-direction: row;"></button>
     </div>
-    <div id="container2" class="mycontainer" style="display:flex; flex-direction: row; justify-content: left; align-items: center">
+    <p id="condition">Driver Condition: Normal...</p>
+    <div id="valuediv">
+        <div id="container1" class="mycontainer" style="display: flex; align-items: center; margin-left: 120px">
+            <canvas id="bpm"></canvas>
+            <canvas id="tmp"></canvas>
+        </div>
+
+
+    <div id="container2" class="mycontainer" style="display: flex; align-items: center; margin-left: 120px">
         <canvas id="rsp"></canvas>
         <canvas id="oxy"></canvas>
     </div>
-    <div id="container3" class="mycontainer">
-        <h2>Vehicle information</h2>
-        <p id="ctp">Cabin temperature: </p>
-        <p id="v">Velocity: </p>
-        <p id="co2">Percentage of CO2 in the cabin: </p>
     </div>
-    <div id="imgc" class="t" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
-        <img src="static/img/carlogo1.png">
+
+    <div id="container3" class="mycontainer" style="">
+        <div id="tutto" style="display: flex">
+            <div id="hum" style="margin-right: 150px; margin-left: 150px">
+                <h2 style="text-align: center">Human information</h2>
+                <div style="display: flex; flex-direction: row; border: 2px solid khaki; border-radius: 20px">
+                    <img src="https://i.ibb.co/5FtD7cX/pngkey-com-human-body-png-8575046.png" style="object-fit: contain" alt="human body">
+                    <div id="interno">
+                        <p><nobr>Body temperature:</nobr> </p>
+                        <p><nobr>Heart rate:</nobr></p>
+                        <p><nobr>Respiration rate:</nobr></p>
+                        <p><nobr>Oxygen saturation:</nobr> </p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tuttovehichle">
+                <h2 style="text-align: center">Vehicle information</h2>
+                <div id="vehvalues" style="display: flex; flex-direction: row; border: 2px solid blue; border-radius: 20px">
+                    <img src="https://i.ibb.co/wCMhHt9/car.png" alt="machine" style="object-fit: contain" />
+                    <div id="cardata" style="text-align: left">
+                        <p id="ctp"><nobr>Cabin temperature:</nobr> </p>
+                        <p id="co2"><nobr>Percentage of CO2 in the cabin:</nobr> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="imgc" class="t" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
     </div>
     <script>
         // Chart.register(ChartDataLabels)
@@ -231,12 +259,12 @@
                 }
 
                 // Print the cabin temperature
-                let ctp = "Cabin temperature: ";
+                let ctp = "<nobr>Cabin temperature: </nobr>";
                 ctp = ctp.concat(values[5]);
                 document.getElementById("ctp").innerHTML = ctp;
 
                 // Print the co2 percentage
-                let co2 = "Percentage of CO2 in the cabin: ";
+                let co2 = "<nobr>Percentage of CO2 in the cabin: </nobr>";
                 co2 = co2.concat(values[6], "%");
                 document.getElementById("co2").innerHTML = co2;
             }
