@@ -93,4 +93,10 @@ p {
 
 div.t {
     mix-blend-mode: multiply;
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    justify-content: center;
+    justify-self: center;
+    align-items: center;
 }
