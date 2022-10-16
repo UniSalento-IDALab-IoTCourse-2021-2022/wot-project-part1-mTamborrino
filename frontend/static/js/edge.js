@@ -14,12 +14,12 @@ function download(url, dest, cb) {
 }
 
 function checkModel() {
-    if(fs.existsSync('/Users/samueleancora/Desktop/alliot/wot-project-part3-FrontEnd-sAncoramTamborrino/finalized_model.sav')){
+    if(fs.existsSync('/Users/micheletamborrino/WebstormProjects/iotdash/finalized_model.sav')){
         console.log("The edge device found a model.")
     }
     else{
         console.log("Model not found. I'm downloading...")
-        download('http://127.0.0.1:3000/download', '/Users/samueleancora/Desktop/alliot/wot-project-part3-FrontEnd-sAncoramTamborrino/finalized_model.sav')
+        download('http://127.0.0.1:3000/download', '/Users/micheletamborrino/WebstormProjects/iotdash/finalized_model.sav')
     }
 }
 

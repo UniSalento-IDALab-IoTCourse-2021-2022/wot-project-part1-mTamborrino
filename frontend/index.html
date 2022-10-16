@@ -42,10 +42,10 @@
                 <div style="display: flex; flex-direction: row; border: 2px solid khaki; border-radius: 20px">
                     <img src="https://i.ibb.co/5FtD7cX/pngkey-com-human-body-png-8575046.png" style="object-fit: contain" alt="human body">
                     <div id="interno">
-                        <p><nobr>Body temperature:</nobr> </p>
-                        <p><nobr>Heart rate:</nobr></p>
-                        <p><nobr>Respiration rate:</nobr></p>
-                        <p><nobr>Oxygen saturation:</nobr> </p>
+                        <p id="bt"><nobr>Body temperature(°C):</nobr> </p>
+                        <p id="hr"><nobr>Heart rate(bpm):</nobr></p>
+                        <p id="rr"><nobr>Respiration rate(bpm):</nobr></p>
+                        <p id="os"><nobr>Oxygen saturation(%):</nobr> </p>
                     </div>
                 </div>
             </div>
@@ -55,7 +55,7 @@
                 <div id="vehvalues" style="display: flex; flex-direction: row; border: 2px solid blue; border-radius: 20px">
                     <img src="https://i.ibb.co/wCMhHt9/car.png" alt="machine" style="object-fit: contain" />
                     <div id="cardata" style="text-align: left">
-                        <p id="ctp"><nobr>Cabin temperature:</nobr> </p>
+                        <p id="ctp"><nobr>Cabin temperature(°C)</nobr> </p>
                         <p id="co2"><nobr>Percentage of CO2 in the cabin:</nobr> </p>
                     </div>
                 </div>
@@ -88,40 +88,40 @@
         function updateAllCharts(values) {
             // Chart 1
             addData(chart1,values[4].slice(10),values[1]);
-            //removeData(chart1)
+            removeData(chart1)
 
             // Chart 2
             addData(chart2,values[4].slice(10),values[0]);
-            //removeData(chart2);
+            removeData(chart2);
 
             // Chart 3
             addData(chart3,values[4].slice(10),values[2]);
-            //removeData(chart3);
+            removeData(chart3);
 
             // Chart 4
             addData(chart4,values[4].slice(10),values[3]);
-            //removeData(chart4);
+            removeData(chart4);
         }
 
         // Heart values
         // var yValues = [120,70,80,85,110,135,167,120,90,95,85];
-        var yValues = [];
+        var yValues = [0,0,0,0,0,0,0,0,0,0];
 
         // Temperature values
         // var tValues = [35,36,36,37,35,30,29,32,33,35,33];
-        var tValues = [];
+        var tValues = [0,0,0,0,0,0,0,0,0,0];
 
         // respiration values
         // var rValues = [21,23,25,26,27,21,26,23,24,25,26];
-        var rValues = [];
+        var rValues = [0,0,0,0,0,0,0,0,0,0];
 
         // oxygen values
         // var oValues = [97,97,98,99,98,97,95,94,96,98,99];
-        var oValues = [];
+        var oValues = [0,0,0,0,0,0,0,0,0,0];
 
         // Labels
         // var xValues = [1,2,3,4,5,6,7,8,9,10,11];
-        var xValues = [];
+        var xValues = [0,0,0,0,0,0,0,0,0,0];
 
 
         // Build the static datasets
@@ -260,6 +260,26 @@
                 if (values[7]==="Abnormal") {
                     document.getElementById("condition").innerHTML = "Driver condition: Abnormal!!";
                 }
+
+                // Print the body temperature
+                let bt = "<nobr>Body Temperature(°C): </nobr>";
+                bt = bt.concat(values[0]);
+                document.getElementById("bt").innerHTML = bt;
+
+                // Print the heart rate
+                let hr = "<nobr>Heart rate(bpm): </nobr>";
+                hr = hr.concat(values[1]);
+                document.getElementById("hr").innerHTML = hr;
+
+                // Print the respiration rate
+                let rr = "<nobr>Respiration rate(bpm): </nobr>";
+                rr = rr.concat(values[2]);
+                document.getElementById("rr").innerHTML = rr;
+
+                // Print the oxygen saturation
+                let os = "<nobr>Oxygen saturation(%): </nobr>";
+                os = os.concat(values[3]);
+                document.getElementById("os").innerHTML = os;
 
                 // Print the cabin temperature
                 let ctp = "<nobr>Cabin temperature: </nobr>";
