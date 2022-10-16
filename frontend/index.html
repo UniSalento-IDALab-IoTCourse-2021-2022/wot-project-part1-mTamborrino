@@ -9,15 +9,18 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0" type="text/javascript"></script>
 </head>
 <body id="general" onload="startup()">
-    <nav class="nav">
-        <a href="/" class="nav__link" data-link>Dashboard</a>
-        <a href="/model" class="nav__link" data-link>Model</a>
-        <a href="/else" class="nav__link" data-link>Something Else</a>
+    <nav id="menu">
+        <input type='checkbox' id='responsive-menu' onclick='updatemenu()'><label></label>
+        <ul>
+            <li><a href='/'>DASHBOARD</a></li>
+            <li><a href='/model'>MODEL</a></li>
+        </ul>
     </nav>
     <div id="app"></div>
     <div id="infodata">
         <button type="submit" class="btn">History<img src="https://cdn-icons-png.flaticon.com/512/2961/2961948.png" style="width:19px; margin-left:8px; margin-right:3px; flex-direction: row;"></button>
     </div>
+    <hr class="solid" style="width: 80%;">
     <p id="condition">Driver Condition: Normal...</p>
     <div id="valuediv">
         <div id="container1" class="mycontainer" style="display: flex; align-items: center; margin-left: 120px">

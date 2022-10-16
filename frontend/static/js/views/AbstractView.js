@@ -9,7 +9,6 @@ export default class {
         document.getElementById("condition").style.display="none";
         document.getElementById("container3").style.display="none";
         document.getElementById("imgc").style.display="none";
-        document.getElementById("body").style.display="none";
     }
 
     setTitle(title) {

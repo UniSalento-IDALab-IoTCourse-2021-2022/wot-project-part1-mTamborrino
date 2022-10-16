@@ -12,14 +12,14 @@ export default class extends AbstractView {
         document.getElementById("condition").style.display="";
         document.getElementById("container3").style.display="";
         document.getElementById("imgc").style.display="";
-        document.getElementById("body").style.display="";
     }
 
     async getHtml() {
         return `
             <h1>Driver State Monitoring Dashboard</h1>
             <p>
-                All the data gathered are visible here. Along with them, some charts are plotted.
+                All the gathering data are visible here. Along with them, some charts are plotted real-time.
+                To check the history, press the button below.
             </p>
         `;
     }
