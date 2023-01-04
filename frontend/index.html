@@ -9,60 +9,60 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0" type="text/javascript"></script>
 </head>
 <body id="general" onload="startup()">
-    <nav id="menu">
-        <input type='checkbox' id='responsive-menu' onclick='updatemenu()'><label></label>
-        <ul>
-            <li><a href='/'>DASHBOARD</a></li>
-            <li><a href='/model'>MODEL</a></li>
-        </ul>
-    </nav>
-    <div id="app"></div>
-    <div id="infodata">
-        <button type="submit" class="btn">History<img src="https://cdn-icons-png.flaticon.com/512/2961/2961948.png" style="width:19px; margin-left:8px; margin-right:3px; flex-direction: row;"></button>
+<nav id="menu">
+    <input type='checkbox' id='responsive-menu' onclick='updatemenu()'><label></label>
+    <ul>
+        <li><a href='/'>DASHBOARD</a></li>
+        <li><a href='/model'>MODEL</a></li>
+    </ul>
+</nav>
+<div id="app"></div>
+<div id="infodata">
+    <button type="submit" class="btn">History<img src="https://cdn-icons-png.flaticon.com/512/2961/2961948.png" style="width:19px; margin-left:8px; margin-right:3px; flex-direction: row;"></button>
+</div>
+<hr class="solid" style="width: 80%;">
+<p id="condition">Driver Condition: Normal...</p>
+<div id="valuediv">
+    <div id="container1" class="mycontainer" style="display: flex; align-items: center; margin-left: 120px">
+        <canvas id="bpm"></canvas>
+        <canvas id="tmp"></canvas>
     </div>
-    <hr class="solid" style="width: 80%;">
-    <p id="condition">Driver Condition: Normal...</p>
-    <div id="valuediv">
-        <div id="container1" class="mycontainer" style="display: flex; align-items: center; margin-left: 120px">
-            <canvas id="bpm"></canvas>
-            <canvas id="tmp"></canvas>
-        </div>
 
 
     <div id="container2" class="mycontainer" style="display: flex; align-items: center; margin-left: 120px">
         <canvas id="rsp"></canvas>
         <canvas id="oxy"></canvas>
     </div>
-    </div>
+</div>
 
-    <div id="container3" class="mycontainer" style="">
-        <div id="tutto" style="display: flex">
-            <div id="hum" style="margin-right: 150px; margin-left: 150px">
-                <h2 style="text-align: center">Human information</h2>
-                <div style="display: flex; flex-direction: row; border: 2px solid khaki; border-radius: 20px">
-                    <img src="https://i.ibb.co/5FtD7cX/pngkey-com-human-body-png-8575046.png" style="object-fit: contain" alt="human body">
-                    <div id="interno">
-                        <p id="bt"><nobr>Body temperature(°C):</nobr> </p>
-                        <p id="hr"><nobr>Heart rate(bpm):</nobr></p>
-                        <p id="rr"><nobr>Respiration rate(bpm):</nobr></p>
-                        <p id="os"><nobr>Oxygen saturation(%):</nobr> </p>
-                    </div>
-                </div>
-            </div>
-
-            <div id="tuttovehichle">
-                <h2 style="text-align: center">Vehicle information</h2>
-                <div id="vehvalues" style="display: flex; flex-direction: row; border: 2px solid blue; border-radius: 20px">
-                    <img src="https://i.ibb.co/wCMhHt9/car.png" alt="machine" style="object-fit: contain" />
-                    <div id="cardata" style="text-align: left">
-                        <p id="ctp"><nobr>Cabin temperature(°C)</nobr> </p>
-                        <p id="co2"><nobr>Percentage of CO2 in the cabin:</nobr> </p>
-                    </div>
+<div id="container3" class="mycontainer" style="">
+    <div id="tutto" style="display: flex">
+        <div id="hum" style="margin-right: 150px; margin-left: 150px">
+            <h2 style="text-align: center">Human information</h2>
+            <div style="display: flex; flex-direction: row; border: 2px solid khaki; border-radius: 20px">
+                <img src="https://i.ibb.co/5FtD7cX/pngkey-com-human-body-png-8575046.png" style="object-fit: contain" alt="human body">
+                <div id="interno">
+                    <p id="bt"><nobr>Body temperature(°C):</nobr> </p>
+                    <p id="hr"><nobr>Heart rate(bpm):</nobr></p>
+                    <p id="rr"><nobr>Respiration rate(bpm):</nobr></p>
+                    <p id="os"><nobr>Oxygen saturation(%):</nobr> </p>
                 </div>
             </div>
         </div>
 
-        <div id="imgc" class="t" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+        <div id="tuttovehichle">
+            <h2 style="text-align: center">Vehicle information</h2>
+            <div id="vehvalues" style="display: flex; flex-direction: row; border: 2px solid blue; border-radius: 20px">
+                <img src="https://i.ibb.co/wCMhHt9/car.png" alt="machine" style="object-fit: contain" />
+                <div id="cardata" style="text-align: left">
+                    <p id="ctp"><nobr>Cabin temperature(°C)</nobr> </p>
+                    <p id="co2"><nobr>Percentage of CO2 in the cabin:</nobr> </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="imgc" class="t" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
     </div>
     <script>
         // Chart.register(ChartDataLabels)
@@ -294,5 +294,6 @@
         }
     </script>
     <script type="module" src="/static/js/index.js"></script>
+</div>
 </body>
 </html>
